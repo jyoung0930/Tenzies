@@ -10,15 +10,40 @@ export default function App() {
     for (let i = 0; i < 10; i++) {
       randomValues.push({
         value: Math.ceil(Math.random() * 6) + 1,
-        isHeld: true,
+        isHeld: false,
         id: nanoid(),
       });
     }
     return randomValues;
   }
 
-  const values = randomNumbers.map((num, index) => {
-    return <Die number={num.value} key={index} isHeld={num.isHeld} />;
+  function holdDice(id) {
+    updatedRandomNumbers((prev) => {
+      prev.map((item) => {
+        return item.id === id ? { ...item, isHeld: !prev.isHeld } : item;
+      });
+    });
+  }
+
+  // function holdDice(id) {
+  //   updatedRandomNumbers((oldDice) =>
+  //     oldDice.map((die) => {
+  //       return die.id === id ? { ...die, isHeld: !die.isHeld } : die;
+  //     })
+  //   );
+  // }
+
+  const values = randomNumbers.map((num) => {
+    return (
+      <Die
+        number={num.value}
+        key={num.id}
+        isHeld={num.isHeld}
+        hold={() => {
+          holdDice(num.id);
+        }}
+      />
+    );
   });
 
   function handleRoll() {
