@@ -27,7 +27,7 @@ and to make it fully functional.
 
 ### Links
 
-- Live Site URL: [Tenzies]()
+- Live Site URL: [Tenzies](https://fluffy-biscochitos-592d3e.netlify.app/)
 
 ### Features
 
